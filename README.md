@@ -381,7 +381,7 @@ Puede sugerir respuestas, redactar resúmenes automáticos de tickets complejos 
 
 > Agrega aquí un video donde se muestre el funcionamiento de FerAgent, una consulta realizada y la respuesta generada desde OCI.
 
-<center>https://github.com/user-attachments/assets/c8e17ca6-7b42-4daf-9cd4-aa579b685c88</center>
+https://github.com/user-attachments/assets/c8e17ca6-7b42-4daf-9cd4-aa579b685c88
 
 
 
