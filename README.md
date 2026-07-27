@@ -5,6 +5,12 @@
 </p>
 
 <p align="center">
+  <a href="TU_URL_DE_LINKEDIN">
+    <img src="https://img.shields.io/badge/Sígueme%20en%20LinkedIn-Fernando%20García-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn de Fernando García">
+  </a>
+</p>
+
+<p align="center">
   <img alt="Python" src="https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white">
   <img alt="Streamlit" src="https://img.shields.io/badge/Streamlit-App-FF4B4B?logo=streamlit&logoColor=white">
   <img alt="OpenAI" src="https://img.shields.io/badge/OpenAI-RAG-412991?logo=openai&logoColor=white">
@@ -366,7 +372,7 @@ Puede sugerir respuestas, redactar resúmenes automáticos de tickets complejos 
 ---
 
 <p align="center">
-  Desarrollado como proyecto final del desafío <strong>Alura Agente</strong>.
+  Desarrollado como proyecto final del <strong>Challenge Alura Agente</strong>.
 </p>
 
 ---
@@ -377,4 +383,4 @@ Puede sugerir respuestas, redactar resúmenes automáticos de tickets complejos 
 
 <!-- Sustituye VIDEO_URL por el enlace de YouTube, Loom, Google Drive u otra plataforma. -->
 
-**[▶️ Ver demostración de FerAgent](VIDEO_URL)**
+**[▶️ Ver demostración de FerAgent](https://youtube.com/shorts/MAdK5AwXcbA)**
