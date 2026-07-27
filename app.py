@@ -20,9 +20,36 @@ st.set_page_config(
 
 st.title("📄 FerAgent - Aprende Servicio al Cliente")
 st.write(
-    "Haz preguntas sobre servicio al cliente y recibirás respuestas"
-    "basadas únicamente en su contenido."
+    "Haz preguntas sobre servicio al cliente y recibe respuestas "
+    "basadas únicamente en el contenido del manual."
 )
+
+with st.container(border=True):
+    st.subheader("¿Cómo usar FerAgent?")
+
+    st.markdown(
+        """
+        Escribe una pregunta en el campo ubicado al final de la página.
+        FerAgent buscará la información dentro del manual y responderá
+        de forma clara y directa.
+
+        **Puedes consultar temas como:**
+
+        - Atención de quejas y reclamos.
+        - Manejo de clientes difíciles.
+        - Comunicación y escucha activa.
+        - Seguimiento y solución de problemas.
+        - Capacitación continua.
+
+        **Importante:** FerAgent responde únicamente con información
+        disponible en el manual. Si no encuentra la respuesta, te lo
+        indicará.
+        """
+    )
+
+    st.caption(
+        "Ejemplo: ¿Qué es el Burnout en atención al cliente y cómo prevenirlo?"
+    )
 
 PDF_PATH = Path(__file__).parent / "data" / "Manual_Servicio_Al_Cliente.pdf"
 
@@ -42,7 +69,7 @@ def validate_project():
         )
         st.stop()
 
-""" Metodos """
+# Metodos
 @st.cache_resource(show_spinner="Procesando el documento...")
 def create_retriever(pdf_path: str):
     reader = PdfReader(pdf_path)
@@ -91,7 +118,7 @@ def create_retriever(pdf_path: str):
 
 validate_project()
 
-""" PARA PROCESAR EL DOCUMENTO """
+# PARA PROCESAR EL DOCUMENTO
 try:
     retriever, total_pages, total_chunks = create_retriever(
         str(PDF_PATH)
@@ -100,13 +127,13 @@ except Exception as error:
     st.error(f"No se pudo procesar el documento: {error}")
     st.stop()
 
-""" MODELO DEL AGENTE """
+# MODELO DEL AGENTE
 llm = ChatOpenAI(
     model="gpt-4o-mini",
     temperature=0,
 )
 
-"""Regla para que solo responda lo del documento"""
+# Regla para que solo responda lo del documento
 with st.sidebar:
     st.subheader("Documento")
     st.write(PDF_PATH.name)
