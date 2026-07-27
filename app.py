@@ -24,7 +24,7 @@ st.write(
     "basadas únicamente en su contenido."
 )
 
-PDF_PATH = Path(__file__).parent / "data" / "Documento.pdf"
+PDF_PATH = Path(__file__).parent / "data" / "Manual_Servicio_Al_Cliente.pdf"
 
 
 def validate_project():
@@ -37,7 +37,7 @@ def validate_project():
 
     if not PDF_PATH.exists():
         st.error(
-            "No se encontró data/Documento.pdf. "
+            "No se encontró data/Manual_Servicio_Al_Cliente.pdf"
             "Agrega el documento dentro de la carpeta data."
         )
         st.stop()
@@ -66,7 +66,7 @@ def create_retriever(pdf_path: str):
         )
 
     splitter = RecursiveCharacterTextSplitter(
-        chunk_size=100,
+        chunk_size=1000,
         chunk_overlap=200,
     )
 
