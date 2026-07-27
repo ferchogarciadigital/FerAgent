@@ -130,3 +130,102 @@ if "messages" not in st.session_state:
         }
     ]
 
+
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+
+
+question = st.chat_input("Escribe una pregunta sobre el documento")
+
+
+if question:
+    st.session_state.messages.append(
+        {"role": "user", "content": question}
+    )
+
+    with st.chat_message("user"):
+        st.markdown(question)
+
+    with st.chat_message("assistant"):
+        with st.spinner("Buscando la respuesta..."):
+            try:
+                retrieved_documents = retriever.invoke(question)
+
+                context_parts = []
+
+                for document in retrieved_documents:
+                    page = document.metadata.get(
+                        "page",
+                        "desconocida",
+                    )
+
+                    context_parts.append(
+                        f"[Página {page}]\n"
+                        f"{document.page_content}"
+                    )
+
+                context = "\n\n".join(context_parts)
+
+                messages = [
+                    (
+                        "system",
+                        """
+Eres un agente especializado en responder preguntas
+sobre Servicio al Cliente.
+
+Reglas:
+1. Responde únicamente con información presente en el contexto.
+2. No inventes datos ni utilices conocimiento externo.
+3. Responde en español, de forma clara y directa.
+4. Cuando sea posible, menciona la página de donde proviene la información.
+5. Si el contexto no contiene la respuesta, responde exactamente:
+"No encontré esa información en el documento."
+""",
+                    ),
+                    (
+                        "human",
+                        f"""
+Contexto recuperado:
+
+{context}
+
+Pregunta del usuario:
+
+{question}
+""",
+                    ),
+                ]
+
+                response = llm.invoke(messages)
+                answer = response.content
+
+                pages = sorted(
+                    {
+                        document.metadata.get("page")
+                        for document in retrieved_documents
+                        if document.metadata.get("page") is not None
+                    }
+                )
+
+                st.markdown(answer)
+
+                if pages:
+                    pages_text = ", ".join(
+                        str(page) for page in pages
+                    )
+                    st.caption(
+                        f"Fragmentos consultados en las páginas: "
+                        f"{pages_text}"
+                    )
+
+            except Exception as error:
+                answer = (
+                    "Ocurrió un error al consultar el documento: "
+                    f"{error}"
+                )
+                st.error(answer)
+
+    st.session_state.messages.append(
+        {"role": "assistant", "content": answer}
+    )
