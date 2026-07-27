@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <a href="TU_URL_DE_LINKEDIN">
+  <a href="https://www.linkedin.com/in/ferchogarciadigital">
     <img src="https://img.shields.io/badge/Sígueme%20en%20LinkedIn-Fernando%20García-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn de Fernando García">
   </a>
 </p>
